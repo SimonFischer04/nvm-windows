@@ -1,4 +1,4 @@
-@echo off
+@echo on
 SET INNOSETUP=%CD%\nvm.iss
 SET ORIG=%CD%
 REM SET GOPATH=%CD%\src
@@ -26,7 +26,7 @@ REM Codesign the executable
 echo ----------------------------
 echo Sign the nvm executable...
 echo ----------------------------
-buildtools\signtool.exe sign /debug /tr http://timestamp.sectigo.com /td sha256 /fd sha256 /a "%GOBIN%\nvm.exe"
+REM buildtools\signtool.exe sign /debug /tr http://timestamp.sectigo.com /td sha256 /fd sha256 /a "%GOBIN%\nvm.exe"
 
 for /f %%i in ('"%GOBIN%\nvm.exe" version') do set AppVersion=%%i
 echo nvm.exe v%AppVersion% built.
@@ -46,7 +46,7 @@ REM Create the distribution directory
 mkdir "%DIST%"
 
 REM Create the "no install" zip version
-for %%a in ("%GOBIN%") do (buildtools\zip -j -9 -r "%DIST%\nvm-noinstall.zip" "%CD%\LICENSE" %%a\* -x "%GOBIN%\nodejs.ico")
+for %%a in ("%GOBIN%") do (buildtools\zip.exe -j -9 -r "%DIST%\nvm-noinstall.zip" "%CD%\LICENSE" %%a\* -x "%GOBIN%\nodejs.ico")
 
 REM Generate update utility
 echo ----------------------------
@@ -61,7 +61,7 @@ REM Generate the installer (InnoSetup)
 echo ----------------------------
 echo Generating installer...
 echo ----------------------------
-buildtools\iscc "%INNOSETUP%" "/o%DIST%"
+buildtools\iscc.exe "%INNOSETUP%" "/o%DIST%"
 
 echo ----------------------------
 echo Sign the installer

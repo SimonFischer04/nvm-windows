@@ -7,7 +7,7 @@
 #define MyAppExeName "nvm.exe"
 #define MyIcon "bin\nodejs.ico"
 #define MyAppId "40078385-F676-4C61-9A9C-F9028599D6D3"
-#define ProjectRoot "."
+#define ProjectRoot "Z:\nvm-windows-master\nvm-windows-master"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -316,7 +316,7 @@ begin
 end;
 
 [Run]
-Filename: "{cmd}"; Parameters: "/C ""mklink /D ""{code:getSymLink}"" ""{code:getCurrentVersion}"""" "; Check: isNodeAlreadyInUse; Flags: runhidden;
+Filename: "{cmd}"; Parameters: "/C ""mklink /J ""{code:getSymLink}"" ""{code:getCurrentVersion}"""" "; Check: isNodeAlreadyInUse; Flags: runhidden;
 
 [UninstallDelete]
 Type: files; Name: "{app}\nvm.exe";
